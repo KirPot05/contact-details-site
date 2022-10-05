@@ -1,0 +1,38 @@
+<header class="nav">
+    <a href="/api/auth?op=login">
+        <button id="login__btn">Login</button>
+    </a>
+</header>
+
+<div class="container">
+    <form id="user-form">
+        <select name="name" id="name">
+            <option value="Ankit">Ankit</option>
+            <option value="Pankaj">Pankaj</option>
+            <option value="Ramesh">Ramesh</option>
+        </select>
+        <input type="text" name="contact_num" id="contact_num" minlength="10" maxlength="10" placeholder="Enter the number here">
+
+        <input type="submit" value="Add">
+    </form>
+
+    <table id="details-table">
+        <thead>
+            <tr>
+                <th>Token. No</th>
+                <th>Name</th>
+                <th>Number</th>
+            </tr>
+        </thead>
+
+        <tbody id="details-table-body">
+            <tr>
+                <td id="rtoken">100001</td>
+                <td id="rname">Ankit</td>
+                <td id="rnum">895959904</td>
+            </tr>
+        </tbody>
+       
+    </tbody>
+    </table>
+</div>

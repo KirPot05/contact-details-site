@@ -1,0 +1,19 @@
+<div>
+    <h1 class="text-center"> <%= heading %> </h1>
+    <form id=<%= isRegister ? "register_form" : "login_form" %>>
+        <% if(isRegister){ %>
+            <input type="text" name="name" id="user-name" placeholder="Enter your name">
+        <% } %>
+        <input type="email" name="userId" id="user-email" placeholder="Enter User ID">
+        <input type="password" name="password" id="user-password" placeholder="Enter your password">
+        
+
+        <input type="submit" value=<%= isRegister ? "Register" : "SignIn" %>>
+    </form>
+
+    <% if(isRegister){ %>
+        <a  href="/api/auth?op=login"> <p class="text-center"> Click here to Login </p> </a>
+    <% } else{ %>
+        <a  href="/api/auth?op=register"> <p class="text-center"> Need an account? Register here </p> </a>
+      <% } %>  
+</div>
