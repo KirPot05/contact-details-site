@@ -1,0 +1,43 @@
+<div class="user-container">
+    <div>
+        <a href="/"> Go to Home </a>
+        <button id="logout__btn" style="margin-left: 1rem;" onclick="logOut()"> Log Out </button>
+
+        <form class="date-container" action="/user">
+            <h2 class="text-center">Filter By Date</h2>
+            <p>
+               <span> Start Date: </span>
+                <input type="date" name="start_date" id="start_date">
+            </p>
+
+            <p>
+                <span> End Date: </span>
+                 <input type="date" name="end_date" id="end_date">
+             </p>
+
+             <button type="submit" id="date-filter">Filter Data</button>
+        </form>
+    </div>
+
+    <% if(err){ %>
+        <h2 class="text-center">
+            <%= err.message%>
+        </h2>    
+    <%} else { %>
+
+    <% for(user in userRecords){ %>
+            <div> 
+                <p class="text-bold font-large"> <%= user %> </p>
+                <% for(details of userRecords[user]) { %>
+                    <p>Token: <%= details.token %> </p>
+                    <p> Contact Number: <%= details.contactNumber %> </p>
+                <% } %>
+
+                <button class="pdf-link" onclick="getPDF(`${window.location.origin}/user?name=<%= user %>`)"> Click here to download PDF </button> 
+            </div>
+
+        <% } %>
+    
+    <%}%>
+        
+</div>
