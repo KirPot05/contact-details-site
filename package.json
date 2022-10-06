@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "env-cmd -f .env node src/index.js",
+    "start": "node src/index.js",
+    "heroku-postbuild": "cd ./node_modules/puppeteer && npm i",
     "dev": "env-cmd -f .env nodemon src/index.js"
   },
   "dependencies": {
