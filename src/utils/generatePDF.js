@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 
 export async function printPDF(url) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "networkidle0" });
   const pdf = await page.pdf({
