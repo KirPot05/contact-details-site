@@ -41,9 +41,13 @@ if (loginForm) {
       .then((data) => {
         console.log(data);
         if (data?.success) {
-          localStorage.setItem("auth-token", data?.response);
+          localStorage.setItem("auth-token", data?.response?.authToken);
           alert(data?.message);
-          window.location.replace("/user");
+          if (data?.response?.isAdmin) {
+            window.location.replace("/admin");
+          } else {
+            window.location.replace("/user");
+          }
         }
       })
       .catch((err) => {

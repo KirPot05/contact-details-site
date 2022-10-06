@@ -55,7 +55,7 @@ router.post(
         password,
         userData.password
       );
-      console.log(userData);
+
       if (!passwordMatches) {
         return res
           .status(500)
@@ -71,7 +71,12 @@ router.post(
       const authToken = await getAuthToken(data);
 
       // Passing created user's data {authenticated token} as response
-      res.json(success_response(200, "Login successful", authToken));
+      res.json(
+        success_response(200, "Login successful", {
+          authToken,
+          isAdmin: userData.isAdmin,
+        })
+      );
     } catch (error) {
       console.error(error.message);
       res.status(500).json(failed_response(500, "Internal Server Error"));
