@@ -21,6 +21,8 @@ if (detailsForm) {
         if (!data?.success) {
           alert(data?.message);
           return;
+        } else {
+          alert(data?.message);
         }
 
         const record = {

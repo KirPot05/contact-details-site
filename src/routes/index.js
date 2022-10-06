@@ -89,7 +89,7 @@ router.post("/add", async (req, res) => {
       contactNumber: req.body.contactNumber,
     };
     let record = await Records.find({ contactNumber: req.body.contactNumber });
-    if (record !== null) {
+    if (record.length > 0) {
       const message = "Record already exists!";
       const result = failed_response(400, message);
       return res.status(400).json(result);

@@ -87,7 +87,7 @@ button{
 }
 
 .date-container{
-    margin-left: 5rem;
+    margin-right: 2rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
