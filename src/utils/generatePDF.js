@@ -7,7 +7,7 @@ export async function printPDF(url) {
   const pdf = await page.pdf({
     format: "A4",
     margin: {
-      top: "50px",
+      top: "52px",
       right: "100px",
       bottom: "50px",
       left: "100px",
