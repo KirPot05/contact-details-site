@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "build": "cd ./node_modules/puppeteer && npm i",
+    "build": "npm i",
+    "heroku-postbuild": "cd ./node_modules/puppeteer && npm i && cd ../../ && npm i",
     "dev": "env-cmd -f .env nodemon src/index.js"
   }, 
   "dependencies": {
