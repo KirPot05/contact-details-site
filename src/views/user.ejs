@@ -1,0 +1,14 @@
+<div class="user-container">
+        <% for(user in userRecords){ %>
+            <div> 
+                <p class="text-bold font-large"> <%= user %> </p>
+                <% for(details of userRecords[user]) { %>
+                    <p>Token: <%= details.token %> </p>
+                    <p> Contact Number: <%= details.contactNumber %> </p>
+                <% } %>
+                    
+                <button class="pdf-link" onclick="getPDF('/user?name=<%= user %>')"> Click here to download PDF </button> 
+            </div>
+
+        <% } %>
+</div>
