@@ -43,10 +43,9 @@ router.post(
       const { email, password } = req.body;
       let userData;
 
-      if (email != null && email != "") {
-        userData = await User.findOne({ where: { email: email } });
+      if (email !== null && email !== "") {
+        userData = await User.findOne({ email: email });
       }
-
       if (userData == null) {
         return res.status(500).json(failed_response(500, "User not found"));
       }
@@ -56,6 +55,7 @@ router.post(
         password,
         userData.password
       );
+      console.log(userData);
       if (!passwordMatches) {
         return res
           .status(500)

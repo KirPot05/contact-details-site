@@ -1,3 +1,28 @@
+// if (
+//   localStorage.getItem("auth-token") === null &&
+//   window.location.pathname !== "/" &&
+//   window.location.pathname !== "/api/auth"
+// ) {
+//   window.location.replace("/");
+//   alert("Please Sign in before continuing");
+// }
+const loginBtn = document.getElementById("login__btn");
+if (loginBtn !== null) {
+  loginBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (localStorage.getItem("auth-token") !== null) {
+      window.location.replace("/user");
+    } else {
+      window.location.replace("/api/auth?op=login");
+    }
+  });
+}
+
+function logOut() {
+  localStorage.removeItem("auth-token");
+  window.location.replace("/api/auth?op=login");
+}
+
 const loginForm = document.getElementById("login_form");
 const registerForm = document.getElementById("register_form");
 if (loginForm) {
@@ -15,6 +40,11 @@ if (loginForm) {
     )
       .then((data) => {
         console.log(data);
+        if (data?.success) {
+          localStorage.setItem("auth-token", data?.response);
+          alert(data?.message);
+          window.location.replace("/user");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -70,9 +100,10 @@ async function authOperation(credentials, operation) {
 
     const response = await res.json();
     if (!response?.success) throw new Error(response?.message);
+    console.log(response);
     return response;
   } catch (err) {
     console.log(err);
-    alert(err.message);
+    alert(err);
   }
 }

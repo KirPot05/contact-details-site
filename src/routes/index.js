@@ -17,7 +17,18 @@ router.get("/", (req, res) => {
 
 router.get("/user", async (req, res) => {
   try {
-    let records = await Records.find();
+    let records;
+    if (req.query.start_date || req.query.end_date) {
+      records = await Records.find({
+        createdAt: {
+          $gte: new Date(req.query.start_date),
+          $lt: new Date(req.query.end_date),
+        },
+      });
+    } else {
+      records = await Records.find();
+    }
+
     if (records.length === 0) throw new Error("No records found");
     records = records.slice(1);
 
@@ -43,16 +54,18 @@ router.get("/user", async (req, res) => {
 
     res.render("user", {
       userRecords,
+      err: false,
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json(failed_response(500, "Something went wrong"));
+    res.status(500).render("user", {
+      err,
+    });
   }
 });
 
 router.post("/pdf/generate", async (req, res) => {
   try {
-    console.log(req.body);
     const pdf = await printPDF(req.body.url);
 
     res
@@ -62,7 +75,10 @@ router.post("/pdf/generate", async (req, res) => {
         "Content-Length": pdf.length,
       })
       .send(pdf);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err });
+  }
 });
 
 router.post("/add", async (req, res) => {

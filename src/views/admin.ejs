@@ -1,0 +1,26 @@
+<div class="container">
+    <button id="logout__btn" onclick="logOut()"> Log Out </button>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <td>Token No.</td>
+                <td>Name</td>
+                <td>Contact Number</td>
+            </tr>
+        </thead>
+
+        <tbody id="admin-body">
+            <% for(let record of records){ %>
+                <tr>
+                    <td> <%= record.token %> </td>
+                    <td> <%= record.name %> </td>
+                    <td> <%= record.contactNumber %> </td>
+                    <td>
+                        <button onclick="getPDF(`${window.location.origin}/admin?token=<%= record.token %>`)"> Generate PDF </button>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>

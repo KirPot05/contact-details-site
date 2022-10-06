@@ -3,6 +3,7 @@ async function getPDF(url) {
     method: "POST",
     headers: {
       Accept: "application/pdf",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       url,
@@ -16,6 +17,6 @@ async function getPDF(url) {
 
   const link = document.createElement("a");
   link.href = window.URL.createObjectURL(pdfBlob);
-  link.download = "new-doc.pdf";
+  link.download = new Date(Date.now()).toTimeString() + ".pdf";
   link.click();
 }
